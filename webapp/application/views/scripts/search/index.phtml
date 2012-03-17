@@ -1,0 +1,18 @@
+<h2>Search results</h2>
+
+<? if ($this->hasSearched): ?>
+  <? if (count($this->projects) > 0): ?>
+    <ul class="projectList">
+    <? foreach ($this->projects as $project): ?>
+<?= $this->partial('projects/_project.phtml', array('project' => $project,
+                                                    'isSelectable' => (bool)Zend_Registry::get('shelfId'),
+                                                    'inHistory' => FALSE
+                                                    )) ?>
+    <? endforeach; ?>
+    </ul>  
+  <? else: ?>
+  <p>Sorry, no project matches your query.</p>
+  <? endif; ?>
+<? else: ?>
+  <p>Invalid query string: query must be at least 3 characters long (numbers are removed)</p>
+<? endif; ?>

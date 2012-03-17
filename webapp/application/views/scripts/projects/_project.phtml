@@ -1,0 +1,18 @@
+<li>
+    <h4>
+    <? if ($this->isSelectable): ?>
+    <input <?= $this->project->isInShelf() ? 'checked="checked"' : '' ?> type="checkbox" title="<?= $this->project->name ?>">
+    <? endif; ?>
+    <a href="<?= $this->project->projectData->projectWebSite ?>"><?= $this->project->name ?></a> &mdash; <?= $this->project->projectData->projectDescription ?></h4>
+  <ul class="projectData <?= $this->project->isInShelf() ? 'inShelf' : '' ?>">
+    <li>Current version is <strong><?= $this->projectProperty($this->project->releaseData->currentVersion) ?></strong></li>
+    <li>Download URL is <strong><?= $this->projectProperty($this->project->releaseData->downloadUrl) ?></strong></li>
+    <li>Release date is <strong><?= $this->projectProperty($this->project->releaseData->releaseDate) ?></strong></li>
+    <li>Release notes at <strong><?= $this->projectProperty($this->project->releaseData->releaseNotesUrl) ?></strong></li>
+    <li class="quiet">Record updated at <?= $this->project->historyDate ?>
+    <? if (!$this->inHistory): ?>
+    <a href="/project/history/<?= urlencode($this->project->name) ?>">Full history</a>
+    <? endif; ?>
+    </li>
+  </ul>
+</li>

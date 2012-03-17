@@ -1,0 +1,32 @@
+<?= "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" ?>
+<rss xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title><![CDATA[Appdate.it]]></title>
+    <link>http://www.appdate.it</link>
+    <description><![CDATA[The one stop software tracker]]></description>
+    <managingEditor>claudio.cicali@appdate.it (Claudio Cicali)</managingEditor>
+    <generator>Appdate.it</generator>
+    <docs>http://blogs.law.harvard.edu/tech/rss</docs>
+    <atom:link href="http://<?= $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'] ?>" rel="self" type="application/rss+xml" />
+    <? foreach($this->projects as $project): ?>
+    <item>
+      <title><![CDATA[<?= $this->escape($project->name) ?> - <?= $project->projectData->projectDescription ?>]]></title>
+      <link><?= $project->projectData->projectWebSite ?></link>
+      <guid isPermaLink="false"><?= $project->releaseDataHash ?></guid>
+      <description><![CDATA[
+      <ul>
+        <li>Current version is <?= $project->releaseData->currentVersion ?></li>
+        <li>Download URL is <?= $project->releaseData->downloadUrl ?></li>
+        <? if (!empty($project->releaseData->releaseDate)): ?>
+        <li>Release date is <?= $project->releaseData->releaseDate ?></li>
+        <? endif; ?>
+        <? if (!empty($project->releaseData->releaseNotesUrl)): ?>
+        <li>Release notes at <?= $project->releaseData->releaseNotesUrl ?></li>
+        <? endif; ?>
+      </ul>
+      ]]></description>
+      <pubDate><?= gmdate(DATE_RSS, strtotime($project->historyDate)) ?></pubDate>
+    </item>
+    <? endforeach; ?>
+  </channel>
+</rss>

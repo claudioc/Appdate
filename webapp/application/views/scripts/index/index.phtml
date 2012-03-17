@@ -1,0 +1,10 @@
+<h2>All the tracked projects &middot; <span class='quiet'>latest first</span></h2>
+
+<ul class="projectList">
+<? foreach ($this->projects as $project): ?>
+<?= $this->partial('projects/_project.phtml', array('project' => $project,
+                                                    'isSelectable' => (bool)Zend_Registry::get('shelfId'),
+                                                    'inHistory' => FALSE
+                                                    )) ?>
+<? endforeach; ?>
+</ul>

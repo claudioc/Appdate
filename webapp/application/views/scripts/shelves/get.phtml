@@ -1,0 +1,15 @@
+<h2>Your shelf content</h2>
+<? if (count($this->projects) > 0): ?>
+  <ul class="projectList">
+  <? foreach ($this->projects as $project): ?>
+  <?= $this->partial('projects/_project.phtml', array('project' => $project,
+                                                      'isSelectable' => TRUE,
+                                                      'inHistory' => FALSE
+                                                      )) ?>
+  
+  <? endforeach; ?>
+  </ul>  
+<? else: ?>
+<p>Your shelf is empty.</p>
+<? endif; ?>
+

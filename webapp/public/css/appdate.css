@@ -1,0 +1,175 @@
+body { 
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.actuator {
+  cursor: pointer;
+  color:#009;
+  text-decoration:underline;
+}
+
+.actuator:hover {
+  color:#000;
+}
+
+.center {
+  text-align: center; 
+}
+
+.aright {
+  text-align: right; 
+}
+
+.box {
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+}
+
+#header {
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 1em;
+}
+
+#header h1 {
+  margin-bottom: 0;
+}
+
+#header h1 a {
+  color: black;
+  text-decoration:none;
+}
+
+#header .box {
+  padding: 1em;
+  min-height: 7.3em;
+  margin-bottom: 1em;
+}
+#header .box h3 {
+  margin-bottom: .5em
+}
+#header .box p {
+  margin-bottom: .5em
+}
+
+#sidebar h3 {
+  margin-bottom: .5em; 
+}
+
+#sidebar .box {
+  background-color: #E5F9E8; 
+  padding: 1em;
+  border-bottom: 3px solid #D3E6D6
+}
+
+#header .box ul,
+#sidebar .box ul {
+  margin-bottom: .5em;
+}
+
+#footer p,
+#sidebar p {
+  margin-bottom: .5em; 
+}
+
+#main {
+  margin-bottom: 2em;
+}
+
+#main ul {
+  margin: 0;
+}
+#main ul ul {
+  margin-left: 1em;
+}
+
+#main li {
+  list-style-type: none;
+}
+
+#main ul.bullets  {
+  margin-bottom: 1.5em;
+  margin-left: 0;
+}
+
+#main ul.bullets li {
+  list-style-type: square;
+}
+
+#main ul.projectData {
+  margin-bottom: 1.5em;
+}
+
+#main h4 {
+  margin-bottom: .5em;
+  background-color: #f2f2f2;
+  padding: .5em;
+  border-bottom: 2px solid #ddd
+}
+
+#frmSearch {
+  
+}
+
+#frmSearch input.text {
+  width: 64% 
+}
+#frmSearch input.button {
+  width: 28%
+}
+
+#betaFlag {
+  float: right;
+  text-align: right;
+  font-weight: bold;
+  color: white;
+  background-color: red;
+  padding: 0 3px;
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
+}
+
+ul.projectData  {
+  position: relative;
+}  
+
+ul.projectData input[type=checkbox] {
+  position: absolute;
+  top: 0;
+  left: -28px;
+}
+
+#main ul.projectData.inShelf h4 {
+  background-color: #E5F9E8; 
+  border-bottom: 2px solid #D3E6D6
+}
+
+.box form {
+  margin-bottom: .5em; 
+}
+
+#frmShelfCreate .formRow {
+  text-align: center; 
+  margin-bottom: .5em;
+}
+
+#shelf {
+  position: relative;
+}
+
+#shelf .loading {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: red;
+  color: white;
+  padding: 3px;
+}
+
+pre.botBody {
+ padding: 5px;
+ overflow: auto;
+ background-color:#f1f1f1;
+ 
+}

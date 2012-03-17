@@ -1,0 +1,66 @@
+-- MySQL dump 10.10
+--
+-- Host: localhost    Database: appdate
+-- ------------------------------------------------------
+-- Server version	5.0.22-Debian_0ubuntu6.06.11-log
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `projects`
+--
+
+DROP TABLE IF EXISTS `projects`;
+CREATE TABLE `projects` (
+  `name` varchar(100) default NULL,
+  `projectData` text,
+  `historyId` int(11) default '1',
+  `historyDate` datetime default NULL,
+  `releaseData` text,
+  `releaseDataHash` char(32) default NULL,
+  UNIQUE KEY `name` (`name`,`historyId`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Table structure for table `searches`
+--
+
+DROP TABLE IF EXISTS `searches`;
+CREATE TABLE `searches` (
+  `id` int(11) NOT NULL auto_increment,
+  `query` varchar(255) default NULL,
+  `client` varchar(255) default NULL,
+  `issuedAt` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Table structure for table `shelves`
+--
+
+DROP TABLE IF EXISTS `shelves`;
+CREATE TABLE `shelves` (
+  `id` char(32) NOT NULL,
+  `projectName` varchar(200) NOT NULL default '',
+  `addedAt` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  PRIMARY KEY  (`id`,`projectName`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+

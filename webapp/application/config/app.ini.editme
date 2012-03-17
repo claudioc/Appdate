@@ -1,0 +1,35 @@
+
+[production]
+; See http://framework.zend.com/issues/browse/ZF-5790
+; database.adapter       = "PDO_MYSQL"
+database.adapter       = "MYSQLI"
+
+bots.directory = "/home/claudioc/Sites/appdate/bots"
+
+database.params.dbname = "appdate"
+database.params.password = ""
+database.params.username = "root"
+
+routes.history.route  = "project/history/:name"
+routes.history.defaults.controller = "projects"
+routes.history.defaults.action = "history"
+
+routes.pages.route  = "page/:slug"
+routes.pages.defaults.controller = "pages"
+routes.pages.defaults.action = "index"
+
+routes.shelves.route  = "shelf/:id"
+routes.shelves.defaults.controller = "shelves"
+routes.shelves.defaults.action = "get"
+
+routes.bots.route  = "dev/getbot/:botname"
+routes.bots.defaults.controller = "dev"
+routes.bots.defaults.action = "getbot"
+
+[development : production]
+database.params.dbname = "appdate"
+database.params.password = ""
+database.params.username = "root"
+
+[testing : production]
+

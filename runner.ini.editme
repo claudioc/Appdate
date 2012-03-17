@@ -1,0 +1,6 @@
+[Runner]
+
+database.params.dbname = appdate
+database.params.password = root
+database.params.username = root
+

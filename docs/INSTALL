@@ -1,0 +1,54 @@
+Appdate.it
+
+Installation instructions
+========================
+
+SVN checkout the source.
+
+You'll have three main directories:
+
+- bots, where the bots reside
+- webapp, where the web application resides
+- docs, where the documents and the initial database dump reside
+
+Install the web application
+---------------------------
+
+1. Download the Zend Framework.
+   cd webapp/library
+   svn export http://framework.zend.com/svn/framework/standard/tags/release-1.8.1/library/Zend
+
+2. Create a (MySQL) database and populate it with docs/appdate.dump
+
+3. cp webapp/application/config/app.ini.editme webapp/application/config/app.ini
+
+4. edit app.ini. There are two database configurations, the development one and 
+   the production one at the bottom of the file. You need also to change 
+   "bots.directory" as well
+
+5. Add an entry in /etc/hosts with something like "appdate.local"
+
+6. Create a virtual host like this one:
+  <VirtualHost *:80>
+    ServerName appdate.local
+    DocumentRoot "/home/claudioc/Sites/appdate/webapp/public"
+    <Directory "/home/claudioc/Sites/appdate/webapp/public/">
+        Options ExecCGI FollowSymLinks
+        AllowOverride all
+        Allow from all
+        Order allow,deny
+    </Directory>
+  </VirtualHost>
+
+You should be able to see http://appdate.local
+   
+Run the bots
+------------
+
+1. Be sure to have python-mysqldb installed
+
+2. cp running.ini.editme running.ini, and edit it
+
+3. Run the bots with ./runner.py
+   
+   

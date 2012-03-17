@@ -1,0 +1,15 @@
+<?= $this->breadcrumb($this->escape($this->name)) ?>
+
+<h2>All tracked versions for <span class="quiet"><?= $this->escape($this->name) ?></span></h2>
+
+<ul class="projectList">
+<? foreach ($this->history as $project): ?>
+<?= $this->partial('projects/_project.phtml', array('project' => $project,
+                                                    'isSelectable' => FALSE,
+                                                    'inHistory' => TRUE
+                                                    )) ?>
+<? endforeach; ?>
+</ul>
+<p><strong>Note:</strong> this <em>history</em> is based on the data we're gathering only from the day we started
+tracking this project (matching the oldest <strong>Record updated</strong> here presented). It has nothing to do with the <em>real</em> history of the project.
+</p>

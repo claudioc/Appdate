@@ -1,0 +1,183 @@
+<?= $this->doctype() ?>
+<html> 
+<head>  
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+  <title>Appdate it! - Stay up to date with the software you use</title>
+	<link rel="stylesheet" href="/css/blueprint/screen.css" type="text/css" media="screen, projection">
+	<link rel="stylesheet" href="/css/blueprint/print.css" type="text/css" media="print">
+  <!--[if IE]><link rel="stylesheet" href="/css/blueprint/ie.css" type="text/css" media="screen, projection"><![endif]-->
+  <?= $this->headLink()->appendStylesheet('/css/appdate.css') ?>
+  <meta name="Designer" content="Claudio Cicali">
+  <meta name="Author" content="Claudio Cicali">
+  <meta name="description" content="Appdate helps you track new software updates. Get your customized RSS!">
+  <? if ($this->isFront): ?>
+  <link href="http://<?= $_SERVER['HTTP_HOST'] ?>/?format=xml" rel="alternate" type="application/rss+xml" title="Latest software updates">
+  <? endif;?>
+  <? if ($this->shelfId): ?>
+  <link href="http://<?= $_SERVER['HTTP_HOST'] ?>/shelf/<?= $this->shelfId ?>?format=xml" rel="alternate" type="application/rss+xml" title="Appdate shelf">
+  <? endif;?>
+  
+  <?= $this->widget('getSatisfaction', array('module' => 'css')) ?>
+</head> 
+<body>
+<div class="container ">
+  <div id="header" class="span-24">
+    <span id="betaFlag">Beta (<a href="/page/betanotes">?</a>)</span>
+    <h1><a href="/">Appdate</a> &ndash; <span class="quiet small">The one stop software tracking hub</span></h1>
+    <? if ($this->isFront): ?>
+    <div class="span-8 ">
+      <div class="box">
+        <h3>What is it?</h3>
+        <p>With Appdate you can track the new releases of some of the most important software applications.</p>
+      </div>
+    </div>
+
+    <div class="span-8 ">
+      <div class="box">
+        <h3>Who should use it?</h3>
+        <p>Anyone interested on being readily "up to date" with the new versions of the software they use.</p>
+      </div>
+    </div>
+    
+    <div class="span-8 last">
+      <div class="box">
+        <h3>Need more?</h3>
+        <ul>
+          <li>Read <a href="/page/about">the about page</a></li>
+          <li>Read <a href="/page/changelog">the Site's changelog</a></li>
+          <li><a href="/page/shelf">No registration required</a>!</li>
+        </ul>
+      </div>
+    </div>
+  <? endif; ?>
+  </div>
+    
+    <div id="main" class="span-16 col">
+      <?= $this->layout()->content ?>
+    </div>
+    
+    <div id="sidebar" class="span-8 last">
+    
+      <div class="box" id="shelf">
+        <span class="loading hide">Working...</span>
+        <div class="content">
+        <?= $this->widget('shelf') ?>
+        </div>
+      </div>
+      
+      <div class="box">
+        <p>Tracked projects so far: <strong>25</strong></p>
+        <?= $this->widget('searchForm') ?>
+        <p class="aright">Take a look at <a href="/dev">the bots</a></p>
+      </div>
+
+      <div class="box">
+        <h3>Get your daily egg</h3>
+        <p>You can get <a href="/?format=xml">updates via RSS</a> of the <strong>whole</strong> tracking feed,
+        or you could <a href="/page/shelf">open a shelf</a>, put some projects into it and then grab the shelf feed.</p>
+        <p>
+        <strong>Note</strong>: the Appdate site itself is a tracked project and will always be added to your shelf :)
+        </p>
+      </div>
+
+      <div class="box">
+        <h3>Latest additions</h3>
+        <ul>
+          <li>CKEditor</li>
+          <li>Oracle VirtualBox</li>
+          <li>Socket.io</li>
+          <li>Node.js</li>
+          <li>Django</li>
+          <li>Emacs</li>
+          <li>OpenOffice</li>
+          <li>MooTools</li>
+          <li>PostgreSQL (8.x and 7.x)</li>
+          <li>Ruby (1.8 and 1.9)</li>
+          <li>Python (2 and 3)</li>
+          <li>FlowPlayer</li>
+          <li>PHP</li>
+          <li>Ruby On Rails</li>
+          <li>Apache HTTP server 2.2 and 2.0</li>
+          <li>Apache Tomcat 5 and 6</li>
+          <li>The Zend Framework</li>
+          <li>The Linux kernel</li>
+          <li>Drupal CMS</li>
+          <li>WordPress</li>
+          <li>jQuery</li>
+          <li>Apache Solr</li>
+          <li>MySQL</li>
+          <li>jEdit</li>
+        </ul>
+      </div>
+
+      <div class="box">
+        <h3>Scheduled projects</h3>
+        <p class="quiet">Ready to be added (in test)</p>
+        <ul>
+          <li>Sphinxsearch</li>
+        </ul>
+      </div>
+
+      <div class="box">
+        <h3>Queued projects</h3>
+        <p class="quiet">Next to be added (sooner or later)</p>
+        <ul>
+          <li>Gnome</li>
+          <li>KDE</li>
+          <li>MapServer</li>
+        </ul>
+      </div>
+
+      <div class="box">
+        <h3>Contribute &ndash; <span class="quiet small">help needed</span></h3>
+        <p>Anyone can contribute to this project.
+        All you need to know is some basic Python programming.
+        Every tracked project needs a little Python script to "grab"
+        the data needed to update the release informations.
+        </p>
+        <p>Of course, you could simply ask for a particular project to be tracked.</p>
+        <p>If interested, please <a href="mailto:claudio.cicali@gmail.com">drop me a line</a>.</p>
+      </div>
+
+		</div>
+    
+    <div id="footer" class="span-24">
+      <p>Appdate is developed by <strong>Claudio Cicali</strong> &ndash; claudio.cicali@gmail.com</p>
+      <p>
+			<strong>Disclaimer</strong>: information about projects is gathered in a heuristic way (read: almost manually) 
+      and we cannot assure accuracy.</p>
+      <p>Appdate is <strong>not</strong> affiliated with any of the project it tracks</p>
+      <p>Appdate uses <a href="http://piwik.org" title="Web analytics" onclick="window.open(this.href);return(false);">Piwik</a></p>
+    </div>
+    
+</div>
+
+<div class="hrelease hide">
+  <span class="currentVersion">0.9beta7</span>
+  <span class="releaseDate">2009/03/14</span>
+  <a class="downloadUrl" href="http://www.appdate.it">Web site</a>
+  <a class="releaseNotesUrl" href="http://www.appdate.it/page/changelog">Changelog</a>
+</div>
+
+<?= $this->widget('getSatisfaction', array('module' => 'js')) ?>
+
+  <script type="text/javascript" src="/js/jquery-1.3.1.js"></script>
+  <script type="text/javascript" src="/js/appdate.js"></script>
+
+<!-- Piwik -->
+<? if ('production' == APPLICATION_ENVIRONMENT): ?>
+<script type="text/javascript">
+var pkBaseURL = (("https:" == document.location.protocol) ? "https://stats.web20.it/piwik/" : "http://stats.web20.it/piwik/");
+document.write(unescape("%3Cscript src='" + pkBaseURL + "piwik.js' type='text/javascript'%3E%3C/script%3E"));
+</script><script type="text/javascript">
+try {
+var piwikTracker = Piwik.getTracker(pkBaseURL + "piwik.php", 2);
+piwikTracker.trackPageView();
+piwikTracker.enableLinkTracking();
+} catch( err ) {}
+</script><noscript><p><img src="http://stats.web20.it/piwik/piwik.php?idsite=2" style="border:0" alt=""/></p></noscript>
+<? endif; ?>
+<!-- End Piwik Tag -->
+
+</body>
+</html>

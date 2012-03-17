@@ -1,0 +1,7 @@
+
+- grafica "NEW" in quelli aggiornati di una settimana
+- controllo sulla validità degli ID (gli id si possono cambiare a mano...) (crc in un COOKIE?)
+- pagina di changelog per Appdate
+- togliere le require da Zend
+- Logo / favicon
+- test cookies

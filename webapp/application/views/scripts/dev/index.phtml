@@ -1,0 +1,12 @@
+
+<h2>Active bots</h2>
+<p>This directory contains every bot running in the backend. Feel free to read through their code and <a href="mailto:claudio.cicali@gmail.com">contact me</a> if
+you think a better approach exists for one of them.</p>
+
+<ul class="bullets">
+<? foreach($this->bots as $bot): ?>
+
+  <li><a href="/dev/getbot/<?= urlencode($bot->basename) ?>"><?= $bot->filename ?></a></li>
+
+<? endforeach; ?>
+</ul>
