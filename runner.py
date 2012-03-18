@@ -44,10 +44,6 @@ def runAll(path):
               # Si legge l'hash più recente del progetto
               cursor.execute("SELECT releaseDataHash, historyId FROM projects WHERE name=%s ORDER BY historyId DESC LIMIT 1", projectData['projectName'] )
               row = cursor.fetchone()
-              try:
-                twitter.update_status("#%s has been updated, new version is %s. Project history at %s" % (projectData['projectName'], releaseData['currentVersion'], "http://appdate.it/project/history/" + urllib.quote_plus(projectData['projectName'])))
-              except Exception, e:
-                pass
               if row is None:
                 # Il progetto non esiste e lo inseriamo per la prima volta
                 cursor.execute("""INSERT INTO projects 
@@ -71,11 +67,11 @@ def runAll(path):
                                             row[0] + 1,
                                             lib.json.write(releaseData),
                                             datahash))
-        #          if twitter is not None:
-        #             try:
-        #              twitter.update_status("#%s has been updated, new version is %s. Project history at %s" % (projectData['projectName'], releaseData['currentVersion'], "http://appdate.it/project/history/" + urllib.quote_plus(projectData['name'])))
-        #            except Exception, e:
-        #              pass
+                if twitter is not None:
+                  try:
+                    twitter.update_status("#%s has been updated, new version is %s. Project history at %s" % (projectData['projectName'], releaseData['currentVersion'], "http://appdate.it/project/history/" + urllib.quote_plus(projectData['projectName'])))
+                  except Exception, e:
+                    pass
                 else:
                   # Aggiorniamo i dati del progetto
                   cursor.execute("""UPDATE projects
