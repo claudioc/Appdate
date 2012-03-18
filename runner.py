@@ -20,7 +20,7 @@ def runAll(path):
         bot.setVerbose(True)
         projectData = bot.getProperties()
         if projectData['projectName'] == UNKNOWN_PROJECT:
-          print "This project has not being given a name"
+          print "This project has not been given a name"
         else:
           if bot.isRunnable():
             rc = bot.run()
@@ -67,6 +67,8 @@ def runAll(path):
                                             row[0] + 1,
                                             lib.json.write(releaseData),
                                             datahash))
+                  if twitter is not None:
+                    twitter.update_status("%s has been updated, new version is %s. Project history at %s" % (projectData['name'], releaseData['currentVersion'], "http://appdate.it/project/history/" + urllib.quote_plus(projectData['name'])))
                 else:
                   # Aggiorniamo i dati del progetto
                   cursor.execute("""UPDATE projects
@@ -78,16 +80,25 @@ def runAll(path):
                                         lib.json.write(releaseData),
                                         projectData['projectName'],
                                         row[1]))
-                  print "Progetto aggiornato"
+                  print "Project updated"
 
 if __name__ == "__main__":
   import sys
   import MySQLdb
   import md5
   import ConfigParser
+  import urllib
 
   config = ConfigParser.ConfigParser()
   config.read('runner.ini')
+
+  twitter = None
+  if config.get("Twitter", "enabled") == True:
+    sys.path.append( "bots/lib" )
+    import tweepy
+    auth = tweepy.OAuthHandler(config.get("Twitter", "consumerKey"), config.get("Twitter", "consumerSecret"))
+    auth.set_access_token(config.get("Twitter", "accessToken"), config.get("Twitter", "accessSecret"))
+    twitter = tweepy.API(auth)
   
   db = MySQLdb.connect(host="localhost", 
                        user=config.get('Runner', 'database.params.username'), 

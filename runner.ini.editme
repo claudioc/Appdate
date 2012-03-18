@@ -1,6 +1,12 @@
-[Runner]
+[Database]
 
-database.params.dbname = appdate
-database.params.password = root
-database.params.username = root
+dbname = appdate
+password = root
+username = root
 
+[Twitter]
+enabled = true
+consumerKey = ''
+consumerSecret = ''
+accessToken = ''
+accessSecret = ''
