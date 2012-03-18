@@ -44,6 +44,10 @@ def runAll(path):
               # Si legge l'hash più recente del progetto
               cursor.execute("SELECT releaseDataHash, historyId FROM projects WHERE name=%s ORDER BY historyId DESC LIMIT 1", projectData['projectName'] )
               row = cursor.fetchone()
+              try:
+                twitter.update_status("#%s has been updated, new version is %s. Project history at %s" % (projectData['projectName'], releaseData['currentVersion'], "http://appdate.it/project/history/" + urllib.quote_plus(projectData['projectName'])))
+              except Exception, e:
+                pass
               if row is None:
                 # Il progetto non esiste e lo inseriamo per la prima volta
                 cursor.execute("""INSERT INTO projects 
@@ -67,8 +71,11 @@ def runAll(path):
                                             row[0] + 1,
                                             lib.json.write(releaseData),
                                             datahash))
-                  if twitter is not None:
-                    twitter.update_status("%s has been updated, new version is %s. Project history at %s" % (projectData['name'], releaseData['currentVersion'], "http://appdate.it/project/history/" + urllib.quote_plus(projectData['name'])))
+        #          if twitter is not None:
+        #             try:
+        #              twitter.update_status("#%s has been updated, new version is %s. Project history at %s" % (projectData['projectName'], releaseData['currentVersion'], "http://appdate.it/project/history/" + urllib.quote_plus(projectData['name'])))
+        #            except Exception, e:
+        #              pass
                 else:
                   # Aggiorniamo i dati del progetto
                   cursor.execute("""UPDATE projects
@@ -80,7 +87,6 @@ def runAll(path):
                                         lib.json.write(releaseData),
                                         projectData['projectName'],
                                         row[1]))
-                  print "Project updated"
 
 if __name__ == "__main__":
   import sys
@@ -93,17 +99,17 @@ if __name__ == "__main__":
   config.read('runner.ini')
 
   twitter = None
-  if config.get("Twitter", "enabled") == True:
+  if config.get("Twitter", "enabled") == "1":
     sys.path.append( "bots/lib" )
     import tweepy
     auth = tweepy.OAuthHandler(config.get("Twitter", "consumerKey"), config.get("Twitter", "consumerSecret"))
     auth.set_access_token(config.get("Twitter", "accessToken"), config.get("Twitter", "accessSecret"))
     twitter = tweepy.API(auth)
-  
+
   db = MySQLdb.connect(host="localhost", 
-                       user=config.get('Runner', 'database.params.username'), 
-                       passwd=config.get('Runner', 'database.params.password'),
-                       db=config.get('Runner', 'database.params.dbname'))
+                       user=config.get('Database', 'username'), 
+                       passwd=config.get('Database', 'password'),
+                       db=config.get('Database', 'dbname'))
 
   botsPath = 'bots'
   sys.path.append(botsPath)

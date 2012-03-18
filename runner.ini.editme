@@ -5,7 +5,7 @@ password = root
 username = root
 
 [Twitter]
-enabled = true
+enabled = 0
 consumerKey = ''
 consumerSecret = ''
 accessToken = ''

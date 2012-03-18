@@ -17,7 +17,7 @@ class Bot_Vim(AppdateHTTPRetriever):
     }
   
   def run(self):
-    self.sniffer.setBaseUrl('http://www.vim.org/')
+    self.sniffer.setBaseUrl('http://www.vim.org')
     self.sniffer.setTargetPath('/')
     
     ##

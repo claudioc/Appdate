@@ -24,7 +24,7 @@ class Bot_NodeJS(AppdateHTTPRetriever):
 
     soup = BeautifulSoup(self.sniffer.getContent())
 
-    a = soup.find('div', {"id": "toc"}).findAll('li')[3].find('a').contents[0]
+    a = soup.find('p', {"class": "version"}).contents[0]
     version = a.replace('v', '').replace(' docs', '').strip()
 
     ##
