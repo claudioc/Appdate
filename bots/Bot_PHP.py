@@ -18,32 +18,29 @@ class Bot_PHP(AppdateHTTPRetriever):
   
   def run(self):
     self.sniffer.setBaseUrl('http://www.php.net')
-    self.sniffer.setTargetPath('/')
+    self.sniffer.setTargetPath('/ChangeLog-5.php')
     
     ##
     # Current Release
     ##
-    pattern="""<li class="php5"><a href="(.*?)">Current PHP 5\.\d Stable: <span class="release">(.*?)</span></a></li>"""
+    pattern="""<section class="version" id="(.*?)">"""
     data = self.sniffer.setTargetPattern(pattern).run()
 
     if not data:
       self.say("No version retrieved")
       return KO
       
-    self.set('currentVersion', data.group(2).strip())
+    self.set('currentVersion', data.group(1).strip())
 
     ##
     # Download URL
     ##
-    self.set('downloadUrl', "http://php.net%s" % data.group(1).strip() )
+    self.set('downloadUrl', "http://php.net/downloads.php#%s" % data.group(1).strip() )
 
     ##
     # Release Date
     ##
-
-    self.sniffer.setTargetPath('/downloads.php')
-    pattern = """<a href="/get/php-%s\.tar\.bz2/from/a/mirror">PHP %s \(tar\.bz2\)</a>.* -  (.*?)<br""" % (self.get('currentVersion'), self.get('currentVersion')) 
-
+    pattern="""<time class='releasedate' datetime='(.*?)'>"""
     data = self.sniffer.setTargetPattern(pattern).run()
     if data is not None:
       self.set('releaseDate', data.group(1).strip())
