@@ -1,4 +1,4 @@
-var Bot = require('appdate-bot'),
+var Bot = require('appdate-bot').Bot,
     sprintf = require('util').format
 ;
 
@@ -9,7 +9,9 @@ var results = {
     downloadUrl: ''
 };
 
-Bot.open('https://github.com/jquery/jquery/releases')
+var bot = new Bot();
+
+bot.open('https://github.com/jquery/jquery/releases')
 
     .then(function (response) {
 
@@ -18,28 +20,28 @@ Bot.open('https://github.com/jquery/jquery/releases')
         var $r1 = $tags.eq(0);
         var $r2 = $tags.eq(1);
 
-        results.releaseDate = $r1.find('time').attr('datetime');
-        results.currentVersion = $r1.find('h3 > a > .tag-name').text();
-        results.downloadUrl = sprintf('http://code.jquery.com/jquery-%s.js', results.currentVersion);
-        results.downloadPage = "http://jquery.com/download/";
+        bot.set('releaseDate', $r1.find('time').attr('datetime'));
+        bot.set('currentVersion', $r1.find('h3 > a > .tag-name').text());
+        bot.set('downloadUrl', sprintf('http://code.jquery.com/jquery-%s.js', bot.get('currentVersion')));
+        bot.set('downloadPage', 'http://jquery.com/download/');
 
         /* Version 2 */
         // console.log($r2.find('time').attr('datetime'));
         // console.log($r2.find('h3 > a > .tag-name').text());
         // console.log($r2.find('h3 > a').attr('href'));
 
-        return Bot.open('http://jquery.com/download/');
+        return bot.open('http://jquery.com/download/');
     })
 
     .then(function (response) {
 
-        var $rn1 = response.$(sprintf('a:contains("jQuery %s release notes")', results.currentVersion));
+        var $rn1 = response.$(sprintf('a:contains("jQuery %s release notes")', bot.get('currentVersion')));
 
-        results.releaseNotesUrl = $rn1.attr('href');
+        bot.set('releaseNotesUrl', $rn1.attr('href'));
     })
 
     .then(function () {
-        console.log(results);
+        console.log(bot.results);
     })
 
     .catch(function (err) {

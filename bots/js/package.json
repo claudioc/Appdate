@@ -3,6 +3,6 @@
   "version": "0.0.0",
   "author": "",
   "dependencies": {
-    "appdate-bot": "0.0.1"
+    "appdate-bot": "latest"
   }
 }
