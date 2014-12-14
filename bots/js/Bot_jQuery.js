@@ -2,13 +2,6 @@ var Bot = require('appdate-bot').Bot,
     sprintf = require('util').format
 ;
 
-var results = {
-    currentVersion: '',
-    releaseNotesUrl: '',
-    releaseDate: '',
-    downloadUrl: ''
-};
-
 var bot = new Bot();
 
 bot.open('https://github.com/jquery/jquery/releases')
