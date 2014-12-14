@@ -1,4 +1,4 @@
-var Bot = require('./Bot'),
+var Bot = require('appdate-bot'),
     sprintf = require('util').format
 ;
 
