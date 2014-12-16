@@ -10,7 +10,7 @@ var bot = new Bot({
     repository: 'https://github.com/jquery/jquery'
 });
 
-bot.open('https://github.com/jquery/jquery/releases')
+bot.fetch('https://github.com/jquery/jquery/releases')
 
     .then(function (response) {
 
@@ -34,9 +34,9 @@ bot.open('https://github.com/jquery/jquery/releases')
     })
 
     .then(function () {
-        console.log(bot.results);
+        bot.end();
     })
 
     .catch(function (err) {
-        console.log(err);
+        bot.abort(err);
     });
