@@ -1,6 +1,10 @@
-var Bot = require('appdate-bot').Bot_Github,
-    sprintf = require('util').format
-;
+
+var appdateBot = require('appdate-bot');
+
+var Bot = appdateBot.Bot_Github,
+    utils = appdateBot.utils,
+    sprintf = require('util').format,
+    _ = appdateBot.lodash;
 
 var bot = new Bot({
     group: 'Angularjs',
@@ -14,19 +18,19 @@ var bot = new Bot({
 //  - get the info from the github release page
 //  - find the first 1.2.x version
 
-bot.fetchTags('angular', 'angular.js', /^v\d+\.\d+\.\d+$/)
+//bot.fetchTags('angular', 'angular.js', /^v(1\.2\.\d+)$/)
+bot.fetchTags('angular', 'angular.js', /^v(\d+\.\d+\.\d+)$/)
 
     .then(function (tags) {
+        
+        // Find the biggest version among the returned ones
+        var max = utils.maxVersion(_.pluck(tags, 'tag'), '1.2.x');
 
-        console.log(tags);
+        // Select the data for the highest version
+        var latest = _.find(tags, { tag: max });
 
-    })
-
-    .then(function (response) {
-
-        //var $rn1 = response.$(sprintf('a:contains("jQuery %s release notes")', bot.get('currentVersion')));
-
-        //bot.set('releaseNotesUrl', $rn1.attr('href'));
+        bot.set('currentVersion', latest.tag);
+        bot.set('releaseDate', latest.date);
     })
 
     .then(function () {
